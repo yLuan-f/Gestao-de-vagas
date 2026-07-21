@@ -2,8 +2,6 @@ package br.com.gestao.vagas.modules.company.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Relational;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
