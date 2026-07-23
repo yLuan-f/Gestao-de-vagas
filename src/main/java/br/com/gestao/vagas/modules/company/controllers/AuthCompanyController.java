@@ -1,7 +1,7 @@
 package br.com.gestao.vagas.modules.company.controllers;
 
 import br.com.gestao.vagas.modules.company.dto.AuthCompanyDTO;
-import br.com.gestao.vagas.modules.company.useCases.AuthCompanyUsecase;
+import br.com.gestao.vagas.modules.company.useCases.AuthCompanyUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthCompanyController {
 
     @Autowired
-    private AuthCompanyUsecase authCompanyUsecase;
+    private AuthCompanyUseCase authCompanyUsecase;
 
     @PostMapping("/company")
     public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) {
