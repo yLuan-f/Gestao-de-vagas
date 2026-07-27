@@ -13,7 +13,7 @@ public class JWTProvider {
     private String secretKey;
 
     public String validatedToken(String token) {
-        token = token.replace("Bearer", " ");
+        token = token.replace("Bearer", "").trim();
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
@@ -25,7 +25,7 @@ public class JWTProvider {
             return subject;
         } catch (JWTVerificationException e) {
             e.printStackTrace();
-            return " ";
+            return null;
         }
     }
 }
