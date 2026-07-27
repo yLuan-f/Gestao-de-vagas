@@ -19,7 +19,7 @@ public class AuthCompanyUseCase {
 
 
     @Value("${security.token.secret}")
-    private String secret;
+    private String secretKey;
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -43,7 +43,7 @@ public class AuthCompanyUseCase {
         }
 
         // se for igual -> gerar token
-        Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(secretKey);
         var token = JWT.create().withIssuer("Javagas")
                 .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
                 .withSubject(company.getId().toString())
