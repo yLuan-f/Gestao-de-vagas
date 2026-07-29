@@ -1,6 +1,8 @@
 package br.com.gestao.vagas.modules.company.useCases;
 
+import br.com.gestao.vagas.modules.company.dto.AuthCandidateResponseDTO;
 import br.com.gestao.vagas.modules.company.dto.AuthCompanyDTO;
+import br.com.gestao.vagas.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.gestao.vagas.modules.company.repositories.CompanyRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 @Service
 public class AuthCompanyUseCase {
@@ -27,7 +30,7 @@ public class AuthCompanyUseCase {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthCompanyDTO authCompanyDTO) {
+    public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
 
         // verificar se o username existe
         var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(
@@ -44,11 +47,22 @@ public class AuthCompanyUseCase {
 
         // se for igual -> gerar token
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
+        var expiresIn = Instant.now().plus(Duration.ofHours(2));
+
         var token = JWT.create().withIssuer("Javagas")
                 .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+                .withExpiresAt(expiresIn)
                 .withSubject(company.getId().toString())
+                .withClaim("roles", Arrays.asList("COMPANY"))
                 .sign(algorithm);
-        return token;
+
+        var authCompanyRespondeDTO = AuthCompanyResponseDTO.builder()
+                .access_token(token)
+                .expires_in(expiresIn.toEpochMilli())
+                .build();
+
+        return authCompanyRespondeDTO;
 
     }
 
