@@ -1,5 +1,6 @@
 package br.com.gestao.vagas.modules.company.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,16 +24,24 @@ public class CompanyEntity {
 
     @NotBlank
     @Pattern(regexp = "\\S+", message = "O campo [username] nao deve conter espacos")
+    @Schema(example = "Javagas")
     private String username;
 
     @Email(message = "Por favor, insira um [email] válido")
+    @Schema(example = "javagas@example.com")
     private String email;
 
     @Length(min = 10, max = 100, message = "A senha deve conter entre 10 e 100 caracteres")
+    @Schema(example = "admin12345")
     private String password;
 
+    @Schema(example = "https://javagas.com")
     private String website;
+
+    @Schema(example = "Javagas")
     private String name;
+
+    @Schema(example = "Empresa de tecnologia")
     private String description;
 
     @CreationTimestamp
