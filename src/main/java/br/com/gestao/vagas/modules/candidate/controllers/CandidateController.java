@@ -1,11 +1,12 @@
 package br.com.gestao.vagas.modules.candidate.controllers;
 
-import br.com.gestao.vagas.modules.candidate.CandidateEntity;
+import br.com.gestao.vagas.modules.candidate.entities.CandidateEntity;
+import br.com.gestao.vagas.modules.candidate.useCases.ApplyJobCandidateUseCase;
 import br.com.gestao.vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.gestao.vagas.modules.candidate.useCases.ListAllJobsByFilterUseCase;
-import br.com.gestao.vagas.modules.company.dto.ProfileCandidateResponseDTO;
+import br.com.gestao.vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 import br.com.gestao.vagas.modules.company.entities.JobEntity;
-import br.com.gestao.vagas.modules.company.useCases.ProfileCandidateUseCase;
+import br.com.gestao.vagas.modules.candidate.useCases.ProfileCandidateUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,6 +38,9 @@ public class CandidateController {
 
     @Autowired
     private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
+
+    @Autowired
+    private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
     @PostMapping("/")
     @Operation(summary = "Cadastro do candidato", description = "Essa funcao e responsavel por cadastrar novos candidatos")
@@ -90,4 +94,18 @@ public class CandidateController {
         return this.listAllJobsByFilterUseCase.execute(filter);
     }
 
+    @PostMapping("/apply")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @Operation(summary = "Inscricao de candidato para uma vaga", description = "Essa funcao e responsavel por realizar a inscricao de um candidato em uma vaga")
+    @SecurityRequirement(name = "jwt_auth")
+    public ResponseEntity<Object> applyJob(@RequestBody UUID idJob, HttpServletRequest request) {
+        var idCandidate = request.getAttribute("candidate_id");
+
+        try {
+            var result = this.applyJobCandidateUseCase.execute(UUID.fromString(idCandidate.toString()), idJob);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package br.com.gestao.vagas.modules.company.dto;
+package br.com.gestao.vagas.modules.candidate.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

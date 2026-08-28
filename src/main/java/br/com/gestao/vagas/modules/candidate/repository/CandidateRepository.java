@@ -1,5 +1,6 @@
-package br.com.gestao.vagas.modules.candidate;
+package br.com.gestao.vagas.modules.candidate.repository;
 
+import br.com.gestao.vagas.modules.candidate.entities.CandidateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

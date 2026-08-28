@@ -1,7 +1,7 @@
-package br.com.gestao.vagas.modules.company.useCases;
+package br.com.gestao.vagas.modules.candidate.useCases;
 
-import br.com.gestao.vagas.modules.candidate.CandidateRepository;
-import br.com.gestao.vagas.modules.company.dto.ProfileCandidateResponseDTO;
+import br.com.gestao.vagas.modules.candidate.repository.CandidateRepository;
+import br.com.gestao.vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

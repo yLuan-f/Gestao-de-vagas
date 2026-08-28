@@ -1,7 +1,8 @@
 package br.com.gestao.vagas.modules.candidate.controllers;
 
 import br.com.gestao.vagas.modules.candidate.useCases.AuthCandidateUseCase;
-import br.com.gestao.vagas.modules.company.dto.AuthCandidateRequestDTO;
+import br.com.gestao.vagas.modules.candidate.dto.AuthCandidateRequestDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/candidate")
+@Tag(name = "Autenticacao de candidato")
 public class AuthCandidateController {
 
     @Autowired

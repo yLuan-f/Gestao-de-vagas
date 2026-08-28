@@ -1,8 +1,8 @@
 package br.com.gestao.vagas.modules.candidate.useCases;
 
 import br.com.gestao.vagas.exceptions.UserFoundException;
-import br.com.gestao.vagas.modules.candidate.CandidateEntity;
-import br.com.gestao.vagas.modules.candidate.CandidateRepository;
+import br.com.gestao.vagas.modules.candidate.entities.CandidateEntity;
+import br.com.gestao.vagas.modules.candidate.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

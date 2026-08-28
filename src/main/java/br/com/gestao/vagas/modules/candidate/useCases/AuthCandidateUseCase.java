@@ -1,9 +1,9 @@
 package br.com.gestao.vagas.modules.candidate.useCases;
 
 
-import br.com.gestao.vagas.modules.candidate.CandidateRepository;
-import br.com.gestao.vagas.modules.company.dto.AuthCandidateRequestDTO;
-import br.com.gestao.vagas.modules.company.dto.AuthCandidateResponseDTO;
+import br.com.gestao.vagas.modules.candidate.repository.CandidateRepository;
+import br.com.gestao.vagas.modules.candidate.dto.AuthCandidateRequestDTO;
+import br.com.gestao.vagas.modules.candidate.dto.AuthCandidateResponseDTO;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;

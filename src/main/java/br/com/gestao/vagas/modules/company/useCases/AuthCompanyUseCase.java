@@ -1,6 +1,5 @@
 package br.com.gestao.vagas.modules.company.useCases;
 
-import br.com.gestao.vagas.modules.company.dto.AuthCandidateResponseDTO;
 import br.com.gestao.vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.gestao.vagas.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.gestao.vagas.modules.company.repositories.CompanyRepository;
