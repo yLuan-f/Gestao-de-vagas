@@ -1,6 +1,7 @@
 package br.com.gestao.vagas.modules.candidate.useCases;
 
 
+import br.com.gestao.vagas.exceptions.AuthCredentialsException;
 import br.com.gestao.vagas.modules.candidate.repository.CandidateRepository;
 import br.com.gestao.vagas.modules.candidate.dto.AuthCandidateRequestDTO;
 import br.com.gestao.vagas.modules.candidate.dto.AuthCandidateResponseDTO;
@@ -32,14 +33,12 @@ public class AuthCandidateUseCase {
 
     public AuthCandidateResponseDTO execute (AuthCandidateRequestDTO authCandidateRequestDTO){
         var candidate = this.candidateRepository.findByUsername(authCandidateRequestDTO.username())
-                .orElseThrow(() -> {
-                    throw new UsernameNotFoundException("Username/password incorrect");
-                });
+                .orElseThrow(AuthCredentialsException::new);
 
         var passwordMatches = this.passwordEncoder
                 .matches(authCandidateRequestDTO.password(), candidate.getPassword());
         if (!passwordMatches) {
-            throw new AuthenticationException("Username/password incorrect") {};
+            throw new AuthCredentialsException();
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
@@ -47,15 +46,14 @@ public class AuthCandidateUseCase {
         var token = JWT.create()
                 .withIssuer("Javagas")
                 .withSubject(candidate.getId().toString())
+                
                 .withClaim("roles", Arrays.asList("CANDIDATE") )
                 .withExpiresAt(expiresIn)
                 .sign(algorithm);
 
-        var authCandidateResponse = AuthCandidateResponseDTO.builder()
-                .access_token(token)
-                .expires_in(expiresIn.toEpochMilli())
+        return AuthCandidateResponseDTO.builder()
+                .accessToken(token)
+                .expiresIn(expiresIn.toEpochMilli())
                 .build();
-
-        return authCandidateResponse;
         }
     }

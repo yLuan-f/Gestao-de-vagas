@@ -1,5 +1,7 @@
 package br.com.gestao.vagas.providers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JWTProvider {
+
+    private static final Logger logger = LoggerFactory.getLogger(JWTProvider.class);
 
     @Value("${security.token.secret}")
     private String secretKey;
@@ -24,7 +28,7 @@ public class JWTProvider {
                     .verify(token);
             return tokenDecoded;
         } catch (JWTVerificationException e) {
-            e.printStackTrace();
+            logger.warn("Failed to validated token JWT: {} ", e.getMessage());
             return null;
         }
     }
