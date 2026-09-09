@@ -7,5 +7,5 @@ RUN mvn clean install -DskipTests
 # ---- Etapa de runtime ----
 FROM eclipse-temurin:26-jre
 EXPOSE 8080
-COPY --from=build /app/target/gestao_vagas-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
