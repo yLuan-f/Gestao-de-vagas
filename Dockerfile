@@ -1,13 +1,11 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update && apt-get install openjdk-26-jdk -y
+# ---- Etapa de build ----
+FROM maven:3-eclipse-temurin-26 AS build
+WORKDIR /app
 COPY . .
+RUN mvn clean install -DskipTests
 
-RUN apt-get install maven -y
-RUN mvn clean install
-
-FROM openjdk:26-jdk-slim
+# ---- Etapa de runtime ----
+FROM eclipse-temurin:26-jre
 EXPOSE 8080
-COPY --from=build /target/gestao_vagas-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+COPY --from=build /app/target/gestao_vagas-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
