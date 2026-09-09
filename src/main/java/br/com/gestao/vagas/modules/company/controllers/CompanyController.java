@@ -1,7 +1,6 @@
 package br.com.gestao.vagas.modules.company.controllers;
 
 import br.com.gestao.vagas.modules.company.entities.CompanyEntity;
-import br.com.gestao.vagas.modules.company.entities.JobEntity;
 import br.com.gestao.vagas.modules.company.useCases.CreateCompanyUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
