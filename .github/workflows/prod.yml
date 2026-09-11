@@ -24,10 +24,10 @@ jobs:
         run: docker build -t yluanf/gestao_vagas .
       - name: Publish image
         run: docker push yluanf/gestao_vagas
-deploy:
-  needs: build
-  runs-on: self-hosted
-  steps:
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
        - name: Pull image docker hub
          run: docker pull yluanf/gestao_vagas:latest
        - name: Stop docker container
