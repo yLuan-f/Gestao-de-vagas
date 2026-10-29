@@ -25,7 +25,6 @@ public class CompanyController {
     private CreateCompanyUseCase createCompanyUseCase;
 
     @PostMapping("/")
-    @PreAuthorize("hasRole('COMPANY')")
     @Tag(name = "Companias", description = "Informacoes das companias")
     @Operation(summary = "Cadastro de companias", description = "Essa funcao e responsavel por cadastrar as companias")
     @ApiResponses({

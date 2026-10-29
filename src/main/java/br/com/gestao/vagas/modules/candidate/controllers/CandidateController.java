@@ -42,14 +42,14 @@ public class CandidateController {
     @Autowired
     private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
-    @PostMapping("/")
+    @PostMapping("/create")
     @Operation(summary = "Cadastro do candidato", description = "Essa funcao e responsavel por cadastrar novos candidatos")
     @ApiResponse (responseCode = "200", content = {
             @Content(schema = @Schema(implementation = CandidateEntity.class))
     })
     @ApiResponse (responseCode = "400", description = "Usuario ja existe")
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
-        try {
+        try {   
             var result = this.createCandidateUseCase.execute(candidateEntity);
             return ResponseEntity.ok().body(result);
         }catch (Exception e) {
@@ -88,7 +88,7 @@ public class CandidateController {
         return this.listAllJobsByFilterUseCase.execute(filter);
     }
 
-    @PostMapping("/apply")
+    @PostMapping("/job/apply")
     @PreAuthorize("hasRole('CANDIDATE')")
     @Operation(summary = "Inscricao de candidato para uma vaga", description = "Essa funcao e responsavel por realizar a inscricao de um candidato em uma vaga")
     @SecurityRequirement(name = "jwt_auth")
