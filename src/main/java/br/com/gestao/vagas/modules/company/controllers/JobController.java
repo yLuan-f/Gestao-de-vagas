@@ -23,13 +23,13 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/company/job")
+@RequestMapping("/company")
 public class JobController {
 
     @Autowired
     private CreateJobUseCase createJobUseCase;
 
-    @PostMapping("/")
+    @PostMapping("/job")
     @PreAuthorize("hasRole('COMPANY')")
     @Tag(name = "Vagas", description = "Informacoes das vagas")
     @Operation(summary = "Cadastro de vagas", description = "Essa funcao e responsavel por cadastrar as vagas dentro das empresas")

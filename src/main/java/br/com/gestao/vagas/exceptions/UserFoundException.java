@@ -2,6 +2,5 @@ package br.com.gestao.vagas.exceptions;
 
 public class UserFoundException extends RuntimeException {
 
-    public UserFoundException() { super("User already exists");
+    public UserFoundException() { super("O Usuário já existe"); }
     }
-}

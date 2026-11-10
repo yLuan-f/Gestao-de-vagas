@@ -24,7 +24,7 @@ public class CompanyController {
     @Autowired
     private CreateCompanyUseCase createCompanyUseCase;
 
-    @PostMapping("/")
+    @PostMapping("/create")
     @Tag(name = "Companias", description = "Informacoes das companias")
     @Operation(summary = "Cadastro de companias", description = "Essa funcao e responsavel por cadastrar as companias")
     @ApiResponses({

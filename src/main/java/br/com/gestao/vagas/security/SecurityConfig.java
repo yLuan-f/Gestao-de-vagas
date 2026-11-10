@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/candidate").permitAll()
                             .requestMatchers("/company").permitAll()
-                            .requestMatchers("/company/auth").permitAll()
+                            .requestMatchers("/company/auth", "/company/create").permitAll()
                             .requestMatchers("/candidate/auth", "/candidate/create").permitAll()
                             .requestMatchers(PERMIT_ALL_LIST).permitAll();
 

@@ -27,15 +27,15 @@ public class CandidateEntity {
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "\\S+", message = "O campo [username] nao deve conter espacos")
+    @Pattern(regexp = "\\S+", message = "O campo Usuário nao deve conter espacos")
     @Schema(example = "rodri", requiredMode = Schema.RequiredMode.REQUIRED, description = "Username do candidato")
     private String username;
 
-    @Email(message = "Por favor, insira um [email] válido")
+    @Email(message = "Por favor, insira um Email válido")
     @Schema(example = "rodri@example.com", requiredMode = Schema.RequiredMode.REQUIRED, description = "Email do candidato")
     private String email;
 
-    @Length (min = 10, max = 100, message = "O campo [password] deve ter entre 10 e 100 caracteres")
+    @Length (min = 10, max = 100, message = "A Senha deve ter entre (10) e (100) caracteres")
     @Schema(example = "admin12345", minLength = 10, maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED, description = "Senha do candidato")
     private String password;
 
